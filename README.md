@@ -1,21 +1,21 @@
-# 💰 ExpenseTracker — Full-Stack Personal Finance Tool
+#  ExpenseTracker — Full-Stack Personal Finance Tool
 
 A personal finance tool built with **Node.js/Express** (backend) and **React** (frontend) to track daily expenses.
 
 ---
 
-## 🔗 Live Demo
+##  Live Demo
 
 | | Link |
 |---|---|
 | **Frontend** | https://expense-tracker-pink-sigma.vercel.app/ |
 | **Backend API** | https://expense-tracker-8drj.onrender.com/ |
 
-> ⚠️ Backend is hosted on Render's free tier — first request may take ~50 seconds to wake up.
+>  Backend is hosted on Render's free tier — first request may take ~50 seconds to wake up.
 
 ---
 
-## 🚀 Quick Start (Local)
+##  Quick Start (Local)
 
 ```bash
 # 1. Clone the repo
@@ -35,15 +35,15 @@ npm start          # runs on http://localhost:3000
 
 ---
 
-## 🏗️ Key Design Decisions
+##  Key Design Decisions
 
-### 💵 Money Handling — Integer Storage (Paise)
+### Money Handling — Integer Storage (Paise)
 Amounts are stored as **integers in paise** (1 INR = 100 paise). For example, ₹123.45 is stored as `12345`. This avoids floating-point precision issues that come up with REAL/FLOAT types. Conversion back to rupees happens only at the API boundary before sending the response.
 
-### 🔁 Idempotency for Safe Retries
+### Idempotency for Safe Retries
 The `POST /expenses` endpoint accepts an optional **`Idempotency-Key`** header (UUID). If the client retries the same request due to network failure, double-click, or page reload, the API returns the original response **without creating a duplicate**. The frontend generates a new key per form session and reuses it until submission succeeds.
 
-### 🗄️ Persistence — SQLite via `better-sqlite3`
+###  Persistence — SQLite via `better-sqlite3`
 SQLite made sense here because:
 - **Data survives server restarts** — unlike in-memory stores
 - **No separate DB server needed** — runs as a file alongside the app
@@ -52,13 +52,13 @@ SQLite made sense here because:
 
 > PostgreSQL would make more sense if this scales to multiple users.
 
-### ✅ Amount Validation
+###  Amount Validation
 - **DB-level:** `INTEGER NOT NULL CHECK(amount > 0)` as a safety net
 - **Both frontend and backend** validate before any write happens
 
 ---
 
-## 📡 API Reference
+##  API Reference
 
 ### `POST /expenses`
 
@@ -114,7 +114,7 @@ Returns list of all categories (defaults + any added by user).
 
 ---
 
-## ⚖️ Trade-offs (due to timebox)
+##  Trade-offs (due to timebox)
 
 | Skipped | Reason |
 |---|---|
@@ -126,7 +126,7 @@ Returns list of all categories (defaults + any added by user).
 
 ---
 
-## 🚫 What I Intentionally Did Not Do
+##  What I Intentionally Did Not Do
 
 - **No user accounts** — single-user tool as specified
 - **No currency conversion** — INR only, per spec
@@ -135,7 +135,7 @@ Returns list of all categories (defaults + any added by user).
 
 ---
 
-## 🧪 Automated Tests
+##  Automated Tests
 
 ```bash
 cd backend
@@ -143,8 +143,8 @@ npm test
 ```
 
 **Tests cover:**
-- ✅ Creating a valid expense
-- ✅ Rejecting negative amounts and missing fields
-- ✅ Idempotency (same key returns same result)
-- ✅ Filtering by category
-- ✅ Sorting by date (newest first)
+-  Creating a valid expense
+-  Rejecting negative amounts and missing fields
+-  Idempotency (same key returns same result)
+- Filtering by category
+- Sorting by date (newest first)
